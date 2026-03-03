@@ -89,7 +89,12 @@ print(factorial(5))
 # Fibonacci function
 
 # Naive Fibonacci
+
+naive_counter = 0 # counter for recursive calls in naive fibonacci
+
 def fib_naive(n: int):
+    global naive_counter
+    naive_counter += 1
     if n == 0:
         return 0
     elif n == 1:
@@ -97,14 +102,19 @@ def fib_naive(n: int):
     else:
         return fib_naive(n-1) + fib_naive(n-2)
 
-print([fib_naive(i) for i in range(10)])
+# print([fib_naive(i) for i in range(10)])
+print(fib_naive(10))
+print(naive_counter)
 
 # Memoized Fibonacci
 memo = {}   # Memoization dictionary
 
+memo_counter = 0 # counter for the recursive calls in memoized fibonacci
+
 # Fibonacci function using memoization
 def fib_memo(n: int):
-    global memo
+    global memo, memo_counter
+    memo_counter += 1
     if n == 0:
         if n not in memo.keys():
             memo[n] = 0
@@ -118,4 +128,6 @@ def fib_memo(n: int):
             memo[n] = fib_memo(n-1) + fib_memo(n-2)
         return memo[n]
 
-print([fib_memo(i) for i in range(10)])
+# print([fib_memo(i) for i in range(10)])
+print(fib_memo(10))
+print(memo_counter)
