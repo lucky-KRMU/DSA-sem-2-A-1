@@ -99,4 +99,23 @@ def fib_naive(n: int):
 
 print([fib_naive(i) for i in range(10)])
 
+# Memoized Fibonacci
+memo = {}   # Memoization dictionary
 
+# Fibonacci function using memoization
+def fib_memo(n: int):
+    global memo
+    if n == 0:
+        if n not in memo.keys():
+            memo[n] = 0
+        return memo[n]
+    elif n == 1:
+        if n not in memo.keys():
+            memo[n] = 1 
+        return memo[n]
+    else:
+        if n not in memo.keys():
+            memo[n] = fib_memo(n-1) + fib_memo(n-2)
+        return memo[n]
+
+print([fib_memo(i) for i in range(10)])
