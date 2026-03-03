@@ -70,5 +70,33 @@ def hanoi_tower(n: str, source: str, auxiliary: str, destination: str):
     hanoiTower.push(move)
     hanoi_tower(n-1, auxiliary, source, destination)
 
-hanoi_tower(3, 'A', 'B', 'C')
-print(hanoiTower.stack)
+# hanoi_tower(3, 'A', 'B', 'C')
+# print(hanoiTower.stack)
+
+
+# PART: B -> Factorial and Fibonacci
+
+# Factorial Function
+def factorial(n: int):
+    # Defining the base case as 0 (0! = 1)
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n-1)
+
+print(factorial(5))
+
+# Fibonacci function
+
+# Naive Fibonacci
+def fib_naive(n: int):
+    if n == 0:
+        return 0
+    elif n == 1:
+        return 1
+    else:
+        return fib_naive(n-1) + fib_naive(n-2)
+
+print([fib_naive(i) for i in range(10)])
+
+
