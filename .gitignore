@@ -4,3 +4,6 @@ tower_of_hanoi.py
 
 #removing the word document
 *.docx
+
+#removing the .tmp files
+*.tmp
