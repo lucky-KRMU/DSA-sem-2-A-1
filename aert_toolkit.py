@@ -70,8 +70,14 @@ def hanoi_tower(n: str, source: str, auxiliary: str, destination: str):
     hanoiTower.push(move)
     hanoi_tower(n-1, auxiliary, source, destination)
 
-# hanoi_tower(3, 'A', 'B', 'C')
-# print(hanoiTower.stack)
+# Storing the output in the file
+with open('output.txt', "w") as file:
+    hanoi_tower(3, 'A', 'B', 'C')
+    print(hanoiTower.stack)
+    file.write("Output for the StackADT implementation using Hanoi tower problem:\n\n")
+    for move in hanoiTower.stack:
+        file.write(f"{move}\n")
+    file.write("\n----------------------------\n")
 
 
 # PART: B -> Factorial and Fibonacci
@@ -84,7 +90,14 @@ def factorial(n: int):
     else:
         return n * factorial(n-1)
 
-# print(factorial(5))
+# Saving the output in the output.txt file
+with open("output.txt", "a") as file:
+    file.write("\nOutput for Factorial(for n=0, 1, 5 & 10 respectively):\n")
+    file.write(f"{factorial(0)}\n")
+    file.write(f"{factorial(1)}\n")
+    file.write(f"{factorial(5)}\n")
+    file.write(f"{factorial(10)}\n")
+    file.write("\n----------------------------\n")
 
 # Fibonacci function
 
@@ -102,9 +115,17 @@ def fib_naive(n: int):
     else:
         return fib_naive(n-1) + fib_naive(n-2)
 
-# print([fib_naive(i) for i in range(10)])
-# print(fib_naive(10))
-# print(naive_counter)
+# Storing the output for fibonacci naive in output.txt file
+with open("output.txt", "a") as file:
+    file.write("\nOutput for Fibonacci navie mehtod(for n=5, 10, 20 & 30 respectively):\n")
+    file.write(f"{fib_naive(5)}\n")
+    naive_counter = 0
+    file.write(f"{fib_naive(10)}\n")
+    naive_counter = 0
+    file.write(f"{fib_naive(20)}\n")
+    naive_counter = 0
+    file.write(f"{fib_naive(30)}\n")
+    file.write("\n----------------------------\n")
 
 # Memoized Fibonacci
 memo = {}   # Memoization dictionary
@@ -128,27 +149,47 @@ def fib_memo(n: int):
             memo[n] = fib_memo(n-1) + fib_memo(n-2)
         return memo[n]
 
-# print([fib_memo(i) for i in range(10)])
-# print(fib_memo(10))
-# print(memo_counter)
+# Storing the output in the output.txt file
+with open("output.txt", "a") as file:
+    file.write("\nOutput for Fibonacci memoized mehtod(for n=5, 10, 20 & 30 respectively){considering memo_counter to update after each call to 1 and memo dictionary to empty after each function run as they both are global}:\n")
+    file.write(f"{fib_memo(5)}\n")
+    memo, memo_counter = {}, 0 
+    file.write(f"{fib_memo(10)}\n")
+    memo, memo_counter = {}, 0 
+    file.write(f"{fib_memo(20)}\n")
+    memo, memo_counter = {}, 0 
+    file.write(f"{fib_memo(30)}\n")
+    memo, memo_counter = {}, 0 
+    file.write("\n----------------------------\n")
 
 # PART: C -> Tower of Hanoi problem
 
 # Making the hanoi auxiliary function to print the moves
-def printMove(source: str, destination: str):
-    print(f"Disk moved from {source} to {destination}")
+def printMove(n:int ,source: str, destination: str):
+    print(f"Move disk {n} from {source} to {destination}")
+
+tower_of_hanoi_output_str = "" # Made extra variable for the sake of storing data in the output file
 
 # Making the hanoi function
 def hanoi(n: int, source: str, auxiliary: str, destination: str):
+    global tower_of_hanoi_output_str
     if n == 1:  # Defining the base case
-        printMove(source, destination)
-        return
+        printMove(n, source, destination)
+        tower_of_hanoi_output_str += f"\nMove Disk {n} from {source} to {destination}"
+        return 
     
     hanoi(n-1, source, destination, auxiliary)
-    printMove(source, destination)
+    printMove(n, source, destination)
+    tower_of_hanoi_output_str += f"\nMove Disk {n} from {source} to {destination}"
     hanoi(n-1, auxiliary, source, destination)
 
-# hanoi(3, 'A', 'B', 'C')
+hanoi(3, 'A', 'B', 'C')
+
+# Storing the output in the output.txt file
+with open("output.txt", "a") as file:
+    file.write("\nOutput for the Tower of hanoi problem:\n")
+    file.write(tower_of_hanoi_output_str+"\n")
+    file.write("\n----------------------------\n")
 
 
 # PART: D -> Recursive Binary search
@@ -169,7 +210,25 @@ def binary_search(arr: list, key: float, low: int, high: int):
         return binary_search(arr, key, mid + 1, high)
 
 arr = [1,3,5,7,9,11,13]
+print(binary_search(arr, 7, 0, (len(arr) - 1) ))
+print(binary_search(arr, 1, 0, (len(arr) - 1) ))
 print(binary_search(arr, 13, 0, (len(arr) - 1) ))
+print(binary_search(arr, 2, 0, (len(arr) - 1) ))
+arr = []
+print(binary_search(arr, 7, 0, len(arr) - 1))
 
+# Storing the data in the output.txt file
+with open("output.txt", "a") as file:
+    arr = [1,3,5,7,9,11,13]
+    file.write("\nThis is the output of binary search using recursion method:\n")
+    file.write("For arr = [1,3,5,7,9,11,13] and key=7, 1, 13 & 2 respectively\n")
+    file.write(f"{binary_search(arr, 7, 0, (len(arr) - 1) )}\n")
+    file.write(f"{binary_search(arr, 1, 0, (len(arr) - 1) )}\n")
+    file.write(f"{binary_search(arr, 13, 0, (len(arr) - 1) )}\n")
+    file.write(f"{binary_search(arr, 2, 0, (len(arr) - 1) )}\n")
+    file.write("\nFor arr = [] and key = 7\n")
+    arr = []
+    file.write(f"{binary_search(arr, 7, 0, (len(arr)-1))}\n")
+    file.write("\n----------------------------\n")
 
 
