@@ -148,5 +148,28 @@ def hanoi(n: int, source: str, auxiliary: str, destination: str):
     printMove(source, destination)
     hanoi(n-1, auxiliary, source, destination)
 
-hanoi(3, 'A', 'B', 'C')
+# hanoi(3, 'A', 'B', 'C')
+
+
+# PART: D -> Recursive Binary search
+# Defining the function
+def binary_search(arr: list, key: float, low: int, high: int):
+
+    # Defining the base case
+    if low > high:
+        return -1
+
+    mid = (low + high) // 2 # Finding out the middle
+
+    if arr[mid] == key:
+        return mid
+    elif arr[mid] > key:
+        return binary_search(arr, key, low, mid - 1)
+    else:
+        return binary_search(arr, key, mid + 1, high)
+
+arr = [1,3,5,7,9,11,13]
+print(binary_search(arr, 13, 0, (len(arr) - 1) ))
+
+
 
