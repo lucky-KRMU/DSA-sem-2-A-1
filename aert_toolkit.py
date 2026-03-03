@@ -51,4 +51,24 @@ class StackADT:
         return len(self.stack)
     
 # Implementation
-# Using Tower
+# Using Tower of hanoi for implementation
+def printMove(source: str, destination: str):
+    print(f"Moving the Disk from {source} to {destination}")
+    return f"Moving the Disk from {source} to {destination}"
+
+hanoiTower = StackADT()
+
+def hanoi_tower(n: str, source: str, auxiliary: str, destination: str):
+    global hanoiTower
+    if n == 1:  # Defining the base case
+        move = printMove(source, destination)
+        hanoiTower.push(move)
+        return
+    
+    hanoi_tower(n-1, source, destination, auxiliary)
+    move = printMove(source, destination)
+    hanoiTower.push(move)
+    hanoi_tower(n-1, auxiliary, source, destination)
+
+hanoi_tower(3, 'A', 'B', 'C')
+print(hanoiTower.stack)
