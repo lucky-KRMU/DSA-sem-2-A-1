@@ -84,7 +84,7 @@ def factorial(n: int):
     else:
         return n * factorial(n-1)
 
-print(factorial(5))
+# print(factorial(5))
 
 # Fibonacci function
 
@@ -103,8 +103,8 @@ def fib_naive(n: int):
         return fib_naive(n-1) + fib_naive(n-2)
 
 # print([fib_naive(i) for i in range(10)])
-print(fib_naive(10))
-print(naive_counter)
+# print(fib_naive(10))
+# print(naive_counter)
 
 # Memoized Fibonacci
 memo = {}   # Memoization dictionary
@@ -129,5 +129,24 @@ def fib_memo(n: int):
         return memo[n]
 
 # print([fib_memo(i) for i in range(10)])
-print(fib_memo(10))
-print(memo_counter)
+# print(fib_memo(10))
+# print(memo_counter)
+
+# PART: C -> Tower of Hanoi problem
+
+# Making the hanoi auxiliary function to print the moves
+def printMove(source: str, destination: str):
+    print(f"Disk moved from {source} to {destination}")
+
+# Making the hanoi function
+def hanoi(n: int, source: str, auxiliary: str, destination: str):
+    if n == 1:  # Defining the base case
+        printMove(source, destination)
+        return
+    
+    hanoi(n-1, source, destination, auxiliary)
+    printMove(source, destination)
+    hanoi(n-1, auxiliary, source, destination)
+
+hanoi(3, 'A', 'B', 'C')
+
